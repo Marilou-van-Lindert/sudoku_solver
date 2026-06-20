@@ -8,7 +8,7 @@ using namespace std;
 
 //function checks if file doesn't contain an imideat unsolvable sudoku
 bool Sudoku::FileAllowed(){
-
+    return true;
 }
 
 
@@ -21,6 +21,35 @@ void Sudoku::FillGrid (){
             SudokuFile.get(number);
         }
     }
+    SudokuFile.close();
+}
+
+
+bool Sudoku::NumberAllowed(int num, int row, int col){
+    //checks if number is allowed in row
+    for (int i = 0, i<sWidth; i++){
+        if (grid[row][i]==num){
+            cout << "number not allowed"<< endl;
+            return false;
+        }
+    }
+
+    //checks if number is allowed in column
+
+    for (int i = 0; i<sHeight; i++){
+        if (grid[i][col]==num){
+            cout << "number not allowed" << endl;
+            return false;
+        }
+    }
+
+    //checks is number is allowed in 3x3 square
+
+
+
+
+
+    return true;
 }
 
 
@@ -29,14 +58,14 @@ void Sudoku::PrintSudoku(){
     cout << "_________________________" << endl;
     for (int i=0; i<sHeight; i++){
         
-        for (int j=0; j<sWidth; j++){
+        for (int j = 0; j<sWidth; j++){
             if (j % 3 == 0){
-                cout <<"| ";
+                cout << "| ";
             }
             cout << grid[i][j]<<" ";
         }
         cout << "|" <<endl;
-        if((i-2)%3 ==0){
+        if((i - 2) % 3 == 0){
             cout << "_________________________" << endl;
         }
     }
