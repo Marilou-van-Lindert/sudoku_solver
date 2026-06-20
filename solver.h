@@ -12,6 +12,7 @@ class Sudoku {
         char number;
         ifstream SudokuFile;
     public:
+        bool FileAllowed();
         void FillGrid();
         void PrintSudoku();
         bool NumberAllowed();
