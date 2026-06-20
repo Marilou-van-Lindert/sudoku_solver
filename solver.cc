@@ -1,5 +1,6 @@
 //main sudoku solver file
 #include <iostream>
+#include <fstream>
 #include <stdio.h>
 #include "solver.h"
 
@@ -7,18 +8,32 @@ using namespace std;
 
 
 void MakeSudoku (){
-    for (int i=0; i<9; i++){
-        for (int j=0; j<9; j++){
+    for (int i=0; i<Sheight; i++){
+        for (int j=0; j<sWidth; j++){
             sudoku[i][j]=j+1;
         };
     };
 };
 
+
+void FillSudoku (){
+    SudokuFile.get(number);
+    for (int i=0; i<Sheight; i++){
+        for (int j=0; j<sWidth; j++){
+            sudoku[i][j]=number-'0';
+            SudokuFile.get(number);
+        };
+    };
+};
+
+
+
+
 void PrintSudoku(){
     cout << "_________________________" << endl;
-    for (int i=0; i<9; i++){
+    for (int i=0; i<Sheight; i++){
         
-        for (int j=0; j<9; j++){
+        for (int j=0; j<sWidth; j++){
             if (j % 3 == 0){
                 cout <<"| ";
             }
@@ -33,6 +48,8 @@ void PrintSudoku(){
 
 int main (){
     MakeSudoku();
+    PrintSudoku();
+    FillSudoku();
     PrintSudoku();
     return 0;
 };
