@@ -7,20 +7,12 @@
 using namespace std;
 
 
-void MakeSudoku (){
-    for (int i=0; i<Sheight; i++){
-        for (int j=0; j<sWidth; j++){
-            sudoku[i][j]=j+1;
-        };
-    };
-};
 
-
-void FillSudoku (){
+void Sudoku::FillGrid (){
     SudokuFile.get(number);
-    for (int i=0; i<Sheight; i++){
+    for (int i=0; i<sHeight; i++){
         for (int j=0; j<sWidth; j++){
-            sudoku[i][j]=number-'0';
+            grid[i][j]=number-'0';
             SudokuFile.get(number);
         };
     };
@@ -28,16 +20,15 @@ void FillSudoku (){
 
 
 
-
-void PrintSudoku(){
+void Sudoku::PrintSudoku(){
     cout << "_________________________" << endl;
-    for (int i=0; i<Sheight; i++){
+    for (int i=0; i<sHeight; i++){
         
         for (int j=0; j<sWidth; j++){
             if (j % 3 == 0){
                 cout <<"| ";
             }
-            cout << sudoku[i][j]<<" ";
+            cout << grid[i][j]<<" ";
         };
         cout << "|" <<endl;
         if((i-2)%3 ==0){
@@ -47,9 +38,8 @@ void PrintSudoku(){
 };
 
 int main (){
-    MakeSudoku();
-    PrintSudoku();
-    FillSudoku();
-    PrintSudoku();
+    Sudoku test;
+    test.FillGrid();
+    test.PrintSudoku();
     return 0;
 };

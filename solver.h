@@ -1,11 +1,22 @@
 #include <stdio.h>
+#include <iostream>
 #include <fstream>
 using namespace std;
 
-int Sheight = 9;
-int sWidth = 9;
-string FilePath = "sudoku.txt";
-ifstream SudokuFile(FilePath);
+const int sHeight = 9;
+const int sWidth = 9;
 
-int sudoku[9][9];
-char number;
+class Sudoku {
+    private:
+        int grid[sHeight][sWidth]={-1};
+        char number;
+        ifstream SudokuFile;
+    public:
+        void FillGrid();
+        void PrintSudoku();
+        bool NumberAllowed();
+        Sudoku()
+        {
+            SudokuFile.open("sudoku.txt");
+        }
+};
