@@ -44,7 +44,9 @@ bool Sudoku::NumberAllowed(int num, int row, int col){
     }
 
     //checks is number is allowed in 3x3 square
-
+    //steps get into the square
+    //write code to read the square
+    
 
 
 
