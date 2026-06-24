@@ -11,6 +11,7 @@ bool Sudoku::FileAllowed(){
     return true;
 }
 
+//checks if sudoku is solved
 bool Sudoku::Solved(){
     for (int i=0; i<sHeight; i++){
         for (int j=0; j<sWidth; j++){
@@ -22,6 +23,7 @@ bool Sudoku::Solved(){
     return true;
 }
 
+//checks if number is legal
 bool Sudoku::LegalNumber(int num){
     if (num < 1 || num > 9){
         return false;
@@ -29,6 +31,8 @@ bool Sudoku::LegalNumber(int num){
     return true;
 }
 
+
+//checks if row is legal
 bool Sudoku::LegalRow(int num){
     if (num < 0 || num > sWidth){
         return false;
@@ -36,6 +40,7 @@ bool Sudoku::LegalRow(int num){
     return true;
 }
 
+//checks if column is legal
 bool Sudoku::LegalCol(int num){
     if (num < 0 || num > sHeight){
         return false;
@@ -43,11 +48,12 @@ bool Sudoku::LegalCol(int num){
     return true;
 }
 
-
+//fills number into sudoku
 void Sudoku::FillNumber(){
     AskNumber();
     if(NumberAllowed()){
         grid[ChosenRow][ChosenCol]=ChosenNumber;
+        //sets value's back to NotLegal
         ChosenNumber = NotLegal;
         ChosenCol = NotLegal;
         ChosenRow = NotLegal;
@@ -75,6 +81,7 @@ void Sudoku::FillGrid (){
     SudokuFile.close();
 }
 
+//ask for number and checks if it is allowed
 void Sudoku::AskNumber(){
     while (!LegalNumber(ChosenNumber)){
         cout << "what number do you want:  ";
@@ -96,7 +103,7 @@ void Sudoku::AskNumber(){
 }
 
 
-
+//checks if number is allowed in the cage of the sudoku
 bool Sudoku::NumberAllowed(){
     //checks if number is allowed in row
     for (int i = 0; i<sWidth; i++){
@@ -152,6 +159,7 @@ void Sudoku::PrintSudoku(){
         }
     }
 }
+
 
 int main (){
     Sudoku test;
