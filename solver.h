@@ -16,7 +16,8 @@ class Sudoku {
     public:
         int ChosenNumber = NotLegal;
         int ChosenRow = NotLegal;
-        int ChosenCol = NotLegal;   
+        int ChosenCol = NotLegal;
+        //void menu();
         bool FileAllowed();
         void FillGrid();
         void PrintSudoku();
