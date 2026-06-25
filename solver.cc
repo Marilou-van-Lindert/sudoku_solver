@@ -11,6 +11,11 @@ bool Sudoku::FileAllowed(){
     return true;
 }
 
+void Sudoku::menu(){
+    cout << "welcome to the sudoku solver, you can upload sudoku's and solve them yourself";
+    cout << "\n Or you can let the program solve them"<< endl;
+}
+
 //checks if sudoku is solved
 bool Sudoku::Solved(){
     for (int i=0; i<sHeight; i++){
@@ -151,9 +156,9 @@ void Sudoku::PrintSudoku(){
             if (j % 3 == 0){
                 cout << "| ";
             }
-            cout << grid[i][j]<<" ";
+            cout << grid[i][j] << " ";
         }
-        cout << "|" <<endl;
+        cout << "|" << endl;
         if((i - 2) % 3 == 0){
             cout << "_________________________" << endl;
         }
@@ -163,6 +168,7 @@ void Sudoku::PrintSudoku(){
 
 int main (){
     Sudoku test;
+    test.menu();
     test.FillGrid();
     test.PrintSudoku();
     while (!test.Solved()){
