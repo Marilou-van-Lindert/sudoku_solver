@@ -103,7 +103,7 @@ void Sudoku::FillGrid (){
 void Sudoku::InitiateCadits(){
     for (int i =0; i<sHeight; i++){
         for (int j = 0; j<sWidth; j++){
-            for (int k = 0; k<amount; k++){
+            for (int k = 0; k<nAmount; k++){
                 if (grid[i][j]==0){
                     ChosenNumber = k+1;
                     ChosenRow = i;
@@ -131,18 +131,7 @@ void Sudoku::AskNumber(){
         cin >> ChosenNumber; 
         cout << "you chose number: " << ChosenNumber << endl;
     }
-    while (!LegalRow(ChosenRow)){
-        cout << "what row do you want:  ";
-        cin >> ChosenRow; 
-        cout << "you chose row: " << ChosenRow << endl;
-        ChosenRow--;
-    }
-    while (!LegalCol(ChosenCol)){
-        cout << "what column do you want:  ";
-        cin >> ChosenCol; 
-        cout << "you chose column: " << ChosenCol << endl;
-        ChosenCol--;
-    }
+    AskCell();
 }
 
 
@@ -211,7 +200,7 @@ void Sudoku::PrintSudoku(){
 
 //prints the current sudoku
 void Sudoku::PrintCandits(){
-    for (int k =0; k<amount; k++){
+    for (int k =0; k<nAmount; k++){
         cout << "_________________________" << endl;
         for (int i=0; i<sHeight; i++){
             
@@ -230,17 +219,70 @@ void Sudoku::PrintCandits(){
 
 }
 
+void Sudoku::AskCell (){
+    ChosenRow = NotLegal;
+    ChosenCol = NotLegal;
+    while (!LegalRow(ChosenRow)){
+        cout << "what row do you want:  ";
+        cin >> ChosenRow; 
+        cout << "you chose row: " << ChosenRow << endl;
+        ChosenRow--;
+    }
+    while (!LegalCol(ChosenCol)){
+        cout << "what column do you want:  ";
+        cin >> ChosenCol; 
+        cout << "you chose column: " << ChosenCol << endl;
+        ChosenCol--;
+    }
+}
+
+
+void Sudoku::PrintCelCandits (){
+    AskCell();
+    for (int i =0; i<nAmount;i++){
+        if (candits[ChosenRow][ChosenCol][i]!=0){
+            cout << candits[ChosenRow][ChosenCol][i] << " ";
+        }
+    }
+    cout << endl;
+}
+
+
+void Sudoku::TestNakedSingle (){
+    int cAmount = 0;
+    int lastCandit = 0;
+    for (int i = 0; i<sHeight;i++){
+        for (int j = 0; j<sWidth;j++){
+            for (int k = 0; k<nAmount;k++){
+                if(candits[i][j][k]!=0){
+                    cAmount++;
+                    lastCandit = candits[i][j][k];
+                }
+            }
+            if (cAmount == 1 && lastCandit != 0){
+                grid[i][j]=lastCandit;
+            }
+            cAmount = 0;
+            lastCandit = 0;
+        }
+    }
+    InitiateCadits ();
+}
+
 
 int main (){
     Sudoku test;
-    test.menu();
-    test.FillGrid();
-    test.InitiateCadits();
-    test.PrintSudoku();
-    test.PrintCandits();
-    // while (!test.Solved()){
-    //     test.ManFillNumber();
-    //     test.PrintSudoku();
-    // }
+    test.menu ();
+    test.FillGrid ();
+    test.InitiateCadits ();
+    test.PrintSudoku ();
+    test.TestNakedSingle ();
+    test.PrintSudoku ();
+    // test.PrintCandits ();
+    //test.PrintCelCandits ();
+    while (!test.Solved ()){
+        test.TestNakedSingle ();
+        test.PrintSudoku ();
+    }
     return 0;
 }

@@ -5,14 +5,14 @@ using namespace std;
 
 const int sHeight = 9;
 const int sWidth = 9;
-const int amount = 9;
+const int nAmount = 9;
 
 
 class Sudoku {
     private:
         int NotLegal = -1;
         int grid[sHeight][sWidth]={NotLegal};
-        int candits[sHeight][sWidth][amount]={NotLegal};
+        int candits[sHeight][sWidth][nAmount]={NotLegal};
         char number;
         bool man = false;
         ifstream SudokuFile;
@@ -34,6 +34,9 @@ class Sudoku {
 
         void InitiateCadits ();
         void PrintCandits ();
+        void PrintCelCandits ();
+        void AskCell ();
+        void TestNakedSingle ();
 
         Sudoku()
         {
